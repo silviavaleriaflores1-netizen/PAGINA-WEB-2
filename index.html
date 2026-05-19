@@ -3,23 +3,49 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Brillo Lila | Bisutería Femenina</title>
+    <title>Valika | Bisutería Femenina</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:wght@600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="bisuteria.css" />
   </head>
   <body>
+    <!-- Preloader -->
+    <div id="preloader" class="preloader" aria-hidden="false">
+      <div class="preloader-inner">
+        <div class="loader-circle" aria-hidden="true">
+          <!-- Inline SVG emblem inspired by provided image -->
+          <svg class="loader-emblem" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+                <stop offset="0" stop-color="#c8a2c8" />
+                <stop offset="1" stop-color="#9b6fa0" />
+              </linearGradient>
+              <linearGradient id="g2" x1="0" x2="1">
+                <stop offset="0" stop-color="#ffffff" stop-opacity="0.9" />
+                <stop offset="1" stop-color="#f0e0f5" stop-opacity="0.85" />
+              </linearGradient>
+            </defs>
+
+            <!-- outer leaves / ornament -->
+            <path class="leaf leaf-left" d="M28 28c-8 6-12 14-10 22 2 10 12 18 18 20 6-2 12-8 14-16-8-2-18-10-22-26z" fill="url(#g1)" />
+            <path class="leaf leaf-right" d="M92 28c8 6 12 14 10 22-2 10-12 18-18 20-6-2-12-8-14-16 8-2 18-10 22-26z" fill="url(#g1)" />
+
+            <!-- center heart/gem -->
+            <path class="heart" d="M60 42c6-10 20-8 24 2 4 10-6 26-24 38-18-12-28-28-24-38 4-10 18-12 24-2z" fill="url(#g2)" stroke="#b088b0" stroke-width="1.6" />
+          </svg>
+        </div>
+        <p class="loader-text">valika</p>
+      </div>
+    </div>
     <header class="site-header">
       <div class="container header-inner">
         <a href="#inicio" class="brand">
-          <span class="brand-mark">B</span>
-          <span>
-            Brillo<br />Lila
-          </span>
+          <span class="brand-mark"><img src="/img/logo/LOGUIS.svg" alt=""></span>
+          <span>Valika</span>
         </a>
 
         <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
@@ -30,6 +56,8 @@
 
         <nav class="main-nav" aria-label="Navegación principal">
           <a href="#inicio">Inicio</a>
+          <a href="#catalogo">Catálogo</a>
+          <a href="#personalizacion">Personalización</a>
           <a href="#productos">Productos</a>
           <a href="#promo">Promoción</a>
           <a href="#nosotros">Nosotros</a>
@@ -57,7 +85,7 @@
         </div>
         <div class="cart-summary">
           <span>Total</span>
-          <strong id="cartTotal">$0</strong>
+          <strong id="cartTotal">Bs. 0</strong>
         </div>
       </div>
     </div>
@@ -81,60 +109,63 @@
         </div>
       </section>
 
-      <section class="products-section container" id="productos">
+      <section class="catalog-section container" id="catalogo">
         <div class="section-header">
-          <p class="eyebrow">Nuestra selección</p>
-          <h2>Detalles que enamoran.</h2>
+          <p class="eyebrow">Colección completa</p>
+          <h2>Explora nuestro catálogo</h2>
         </div>
 
-        <div class="product-grid">
-          <article class="product-card" data-product="Anillo Estelar" data-price="38">
-            <img src="https://images.unsplash.com/photo-1517029082679-60c5cd3adf8c?auto=format&fit=crop&w=800&q=80" alt="Anillo estelar" />
-            <div class="product-info">
-              <h3>Anillo Estelar</h3>
-              <p class="price">$38</p>
-              <div class="product-actions">
-                <button class="add-cart button button-tertiary" type="button">Agregar al carrito</button>
-                <button class="view-details button button-secondary" type="button">Ver detalles</button>
-              </div>
-            </div>
-          </article>
+        <div class="catalog-controls">
+          <div class="catalog-tabs">
+            <button class="catalog-tab active" data-filter="all">Todos</button>
+            <button class="catalog-tab" data-filter="aretes">Aretes</button>
+            <button class="catalog-tab" data-filter="manillas">Manillas</button>
+            <button class="catalog-tab" data-filter="anillos">Anillos</button>
+            <button class="catalog-tab" data-filter="collares">Collares</button>
+            <button class="catalog-tab" data-filter="accesorios">Accesorios</button>
+          </div>
+          <div class="catalog-search">
+            <input type="text" id="catalogSearch" placeholder="Buscar joyas..." aria-label="Buscar en el catálogo" />
+          </div>
+        </div>
 
-          <article class="product-card" data-product="Pulsera Aura" data-price="45">
-            <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=800&q=80" alt="Pulsera aura" />
-            <div class="product-info">
-              <h3>Pulsera Aura</h3>
-              <p class="price">$45</p>
-              <div class="product-actions">
-                <button class="add-cart button button-tertiary" type="button">Agregar al carrito</button>
-                <button class="view-details button button-secondary" type="button">Ver detalles</button>
-              </div>
-            </div>
-          </article>
+        <div class="catalog-grid" id="catalogGrid">
+          <!-- Se carga dinámicamente mediante bisuteria.js -->
+        </div>
+        <div id="catalogPagination" class="catalog-pagination"></div>
+      </section>
 
-          <article class="product-card" data-product="Collar Eclipse" data-price="52">
-            <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=80" alt="Collar eclipse" />
-            <div class="product-info">
-              <h3>Collar Eclipse</h3>
-              <p class="price">$52</p>
-              <div class="product-actions">
-                <button class="add-cart button button-tertiary" type="button">Agregar al carrito</button>
-                <button class="view-details button button-secondary" type="button">Ver detalles</button>
-              </div>
-            </div>
+      <section class="custom-section container" id="personalizacion">
+        <div class="section-header">
+          <p class="eyebrow">Exclusividad</p>
+          <h2>Joyas personalizadas a pedido</h2>
+        </div>
+        
+        <div class="custom-steps">
+          <article class="custom-card">
+            <div class="step-icon">01</div>
+            <h3>Tu Visión</h3>
+            <p>Cuéntanos tu idea, envíanos un boceto o una foto de referencia para comenzar el proceso creativo.</p>
           </article>
+          <article class="custom-card">
+            <div class="step-icon">02</div>
+            <h3>Propuesta</h3>
+            <p>Diseñamos una pieza exclusiva seleccionando los mejores materiales y gemas en tonos lila.</p>
+          </article>
+          <article class="custom-card">
+            <div class="step-icon">03</div>
+            <h3>Creación</h3>
+            <p>Nuestros maestros artesanos dan vida a tu joya a mano, con precisión y cuidado artesanal.</p>
+          </article>
+          <article class="custom-card">
+            <div class="step-icon">04</div>
+            <h3>Tu Joya</h3>
+            <p>Recibe tu creación única en un empaque de lujo, lista para contar tu propia historia.</p>
+          </article>
+        </div>
 
-          <article class="product-card" data-product="Aretes Luz" data-price="30">
-            <img src="https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=800&q=80" alt="Aretes luz" />
-            <div class="product-info">
-              <h3>Aretes Luz</h3>
-              <p class="price">$30</p>
-              <div class="product-actions">
-                <button class="add-cart button button-tertiary" type="button">Agregar al carrito</button>
-                <button class="view-details button button-secondary" type="button">Ver detalles</button>
-              </div>
-            </div>
-          </article>
+        <div class="custom-cta">
+          <button type="button" id="openCustomModal" class="button button-primary">Solicitar cotización</button>
         </div>
       </section>
 
@@ -169,7 +200,7 @@
           <form id="promoForm">
             <div class="promo-group">
               <label for="promoCode">Código promocional</label>
-              <input id="promoCode" type="text" placeholder="Ej: BRILLOLILA" required />
+              <input id="promoCode" type="text" placeholder="Ej: VALIKA" required />
             </div>
             <div class="promo-group">
               <label for="promoName">Nombre completo</label>
@@ -197,24 +228,22 @@
       <section class="about-section container" id="nosotros">
         <div class="section-header">
           <p class="eyebrow">Nosotros</p>
-          <h2>Arte femenino con alma delicada.</h2>
+          <h2>Nuestra Identidad</h2>
         </div>
         <div class="about-grid">
           <div class="about-copy">
+            <h3>Misión</h3>
             <p>
-              Brillo Lila nace de la pasión por los detalles. Cada colección está pensada para acompañarte con elegancia, frescura y un estilo atemporal.
+              Somos una empresa dedicada al diseño y elaboración de joyas, para personas que valoren la autenticidad y arte. Elaboramos piezas que combinan la creatividad y modernidad para realzar la belleza e identidad de nuestros clientes.
             </p>
+            <h3>Visión</h3>
             <p>
-              Trabajamos con acabados suaves, texturas luminosas y combinaciones cromáticas que reflejan personalidad y calma. Joyas para sentirte única todos los días.
+              Queremos llegar a ser una marca reconocida a nivel nacional, por ofrecer diseños modernos que combinen la creatividad y originalidad en los próximos 5 años.
             </p>
           </div>
           <div class="about-card">
-            <h3>Hecho a mano</h3>
-            <p>Diseños exclusivos que combinan técnicas artesanales y sensaciones modernas.</p>
-          </div>
-          <div class="about-card">
-            <h3>Creatividad</h3>
-            <p>Propuestas femeninas inspiradas en la naturaleza, la luz y las formas suavemente geométricas.</p>
+            <h3>Valores</h3>
+            <p>Innovación, Originalidad, Responsabilidad, Creatividad, Solidaridad, Empatía e Integridad.</p>
           </div>
         </div>
       </section>
@@ -226,7 +255,7 @@
         </div>
         <div class="testimonials-grid">
           <article class="testimonial-card">
-            <p class="testimonial-copy">"Mis piezas Brillo Lila son perfectas para cada ocasión. La calidad y el diseño me enamoraron."</p>
+            <p class="testimonial-copy">"Mis piezas Valika son perfectas para cada ocasión. La calidad y el diseño me enamoraron."</p>
             <div class="testimonial-meta">
               <strong>Ana M.</strong>
               <span>Cliente feliz</span>
@@ -259,22 +288,22 @@
         <div class="care-slider" aria-label="Slider infinito de cuidados de joyas">
           <div class="care-slider-track">
             <div class="care-slide">
-              <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80" alt="Collar elegante sobre fondo claro" />
+              <img src="img/care-1.jpg" alt="Collar elegante sobre fondo claro" />
             </div>
             <div class="care-slide">
-              <img src="https://images.unsplash.com/photo-1517029082679-60c5cd3adf8c?auto=format&fit=crop&w=900&q=80" alt="Pulsera fina apoyada en tela" />
+              <img src="img/care-2.jpg" alt="Pulsera fina apoyada en tela" />
             </div>
             <div class="care-slide">
-              <img src="https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=900&q=80" alt="Aretes delicados sobre superficie" />
+              <img src="img/care-3.jpg" alt="Aretes delicados sobre superficie" />
             </div>
             <div class="care-slide">
-              <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80" alt="Collar elegante sobre fondo claro" />
+              <img src="img/care-1.jpg" alt="Collar elegante sobre fondo claro" />
             </div>
             <div class="care-slide">
-              <img src="https://images.unsplash.com/photo-1517029082679-60c5cd3adf8c?auto=format&fit=crop&w=900&q=80" alt="Pulsera fina apoyada en tela" />
+              <img src="img/care-2.jpg" alt="Pulsera fina apoyada en tela" />
             </div>
             <div class="care-slide">
-              <img src="https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=900&q=80" alt="Aretes delicados sobre superficie" />
+              <img src="img/care-3.jpg" alt="Aretes delicados sobre superficie" />
             </div>
           </div>
         </div>
@@ -294,12 +323,66 @@
       </div>
     </div>
 
+    <!-- Image preview modal (for preloader image) -->
+    <div class="modal-overlay preview-modal" id="imagePreviewModal" aria-hidden="true">
+      <div class="product-modal image-preview" role="dialog" aria-modal="true">
+        <button type="button" class="close-button" id="closeImagePreview" aria-label="Cerrar vista previa">×</button>
+        <img src="" alt="Vista previa" id="imagePreviewImg" />
+      </div>
+    </div>
+
+    <!-- Formulario de Personalización Modal -->
+    <div class="modal-overlay" id="customFormModal" aria-hidden="true">
+      <div class="product-modal" role="dialog" aria-modal="true" aria-labelledby="customModalTitle">
+        <button type="button" class="close-button" id="closeCustomFormModal" aria-label="Cerrar formulario">×</button>
+        <div class="modal-details">
+          <h3 id="customModalTitle">Diseño a Pedido</h3>
+          <p class="modal-description">Cuéntanos tu idea para crear una pieza única y personalizada.</p>
+          <form id="customDesignForm" class="custom-form-layout">
+            <div class="promo-group">
+              <label for="customName">Nombre completo</label>
+              <input type="text" id="customName" required placeholder="Tu nombre" />
+            </div>
+            <div class="promo-group">
+              <label for="customContact">WhatsApp o Correo</label>
+              <input type="text" id="customContact" required placeholder="Ej: +591 ... o email@ejemplo.com" />
+            </div>
+            <div class="promo-group">
+              <label for="customType">Tipo de Joya</label>
+              <select id="customType">
+                <option value="aretes">Aretes</option>
+                <option value="manillas">Manillas</option>
+                <option value="anillos">Anillos</option>
+                <option value="collares">Collares</option>
+                <option value="accesorios">Accesorios</option>
+              </select>
+            </div>
+            <div class="promo-group">
+              <label for="customDetails">Detalles del diseño</label>
+              <textarea id="customDetails" rows="4" required placeholder="Describe materiales, colores o el significado de tu joya..."></textarea>
+            </div>
+            <div class="promo-group">
+              <label for="customImage">Imagen de referencia (Opcional)</label>
+              <input type="file" id="customImage" accept="image/*" class="custom-file-input" />
+              <div id="imagePreviewContainer" class="image-preview-container">
+                <img id="customImagePreview" src="" alt="Vista previa" style="display: none;" />
+              </div>
+            </div>
+            <div class="modal-footer-actions">
+              <button type="button" id="cancelCustomForm" class="button button-secondary">Cerrar</button>
+              <button type="submit" class="button button-primary">Enviar Solicitud</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <div class="toast" id="toastMessage" aria-live="polite" aria-atomic="true"></div>
 
     <footer class="site-footer" id="contacto">
       <div class="container footer-inner">
         <div>
-          <h3>Brillo Lila</h3>
+          <h3>Valika</h3>
           <p>Conecta con nosotros a través de redes sociales para nuevas colecciones y promociones.</p>
         </div>
         <div class="footer-links">
@@ -310,8 +393,20 @@
           <a href="#contacto">Contacto</a>
         </div>
       </div>
+
+      <div class="footer-stats container">
+        <div class="stat-item">
+          <span class="stat-label">Visitas Totales</span>
+          <span id="visitorCount" class="stat-number">0</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Cuenta para Fin de Año</span>
+          <span id="countdownTimer" class="stat-number">00d 00h 00m 00s</span>
+        </div>
+      </div>
+
       <div class="footer-bottom container">
-        <p>© 2026 Brillo Lila. Todos los derechos reservados.</p>
+        <p>© 2026 Valika. Todos los derechos reservados.</p>
         <div class="socials">
           <a href="#" aria-label="Instagram">Instagram</a>
           <a href="#" aria-label="Pinterest">Pinterest</a>
@@ -320,6 +415,14 @@
       </div>
     </footer>
 
+    <!-- Botón Flotante de WhatsApp -->
+    <a href="https://wa.me/59178187193?text=Hola%20Valika,%20estoy%20interesado%20en%20una%20joya%20o%20trabajo%20personalizado." class="whatsapp-float" target="_blank" aria-label="Contactar por WhatsApp">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="white">
+        <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.1 0-65.6-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.4 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.2-8.5-44.2-27.1-16.4-14.6-27.4-32.7-30.6-38.2-3.2-5.6-.3-8.6 2.5-11.3 2.5-2.5 5.6-6.5 8.3-9.7 2.8-3.3 3.7-5.6 5.5-9.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.4-29.8-17-41.1-4.5-10.9-9.1-9.5-12.4-9.6h-10.6c-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+      </svg>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="bisuteria.js"></script>
   </body>
 </html>
