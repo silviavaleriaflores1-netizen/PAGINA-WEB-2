@@ -150,6 +150,7 @@ const openCustomModalFn = () => {
   customFormModal.setAttribute('aria-hidden', 'false');
 };
 
+
 const closeCustomModalFn = () => {
   customFormModal.classList.remove('open');
   customFormModal.setAttribute('aria-hidden', 'true');
@@ -158,7 +159,22 @@ const closeCustomModalFn = () => {
 navToggle.addEventListener('click', () => {
   const expanded = navToggle.getAttribute('aria-expanded') === 'true';
   navToggle.setAttribute('aria-expanded', String(!expanded));
+  navToggle.classList.toggle('open');
   mainNav.classList.toggle('open');
+  navToggle.textContent = mainNav.classList.contains('open') ? 'Cerrar' : 'Menú';
+  // Evita que el fondo se mueva cuando el menú está abierto
+  document.body.style.overflow = mainNav.classList.contains('open') ? 'hidden' : '';
+});
+
+// Cerrar el menú automáticamente al hacer clic en un enlace de navegación
+mainNav.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    mainNav.classList.remove('open');
+    navToggle.classList.remove('open');
+    navToggle.textContent = 'Menú';
+    navToggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  });
 });
 
 cartButton.addEventListener('click', toggleCartPanel);
@@ -319,7 +335,7 @@ const catalogSearchInput = document.getElementById('catalogSearch');
 // Áreas: manillas, aretes, collares, anillos, accesorios
 const areas = ['manillas', 'aretes', 'collares', 'anillos', 'accesorios'];
 
-// Generar datos de ejemplo (20 por área)
+// Generar datos de ejemplo con imágenes únicas
 const catalogData = {};
 const sampleImages = {
   manillas: [
@@ -327,45 +343,63 @@ const sampleImages = {
     'img/manillas/2.jpg',
     'img/manillas/3.jpg',
     'img/manillas/4.jpg',
-    'img/manillas/5.jpg'
+    'img/manillas/5.jpg',
+    'img/manillas/6.jpg',
+    'img/manillas/7.jpg',
+    'img/manillas/8.jpg',
+  
   ],
   aretes: [
-    'img/aretes/estrella y concha.jpg',
-    'img/aretes/imagen 2.jpg',
-    'img/aretes/imagen 3.jpg',
-    'img/aretes/imagen 4.jpg',
-    'img/aretes-5.jpg'
+    'img/aretes/estrella%20y%20concha.jpg',
+    'img/aretes/imagen%202.jpg',
+    'img/aretes/imagen%203.jpg',
+    'img/aretes/imagen%204.jpg',
+    'img/aretes/6.jpg',
+    'img/aretes/5.jpg',
+    'img/aretes/7.jpg',
+    'img/aretes/8.jpg'
   ],
   collares: [
     'img/collares/1.jpg',
     'img/collares/2.jpg',
     'img/collares/3.jpg',
     'img/collares/4.jpg',
-    'img/collares/5.jpg'
+    'img/collares/5.jpg',
+    'img/collares/6.jpg',
+    'img/collares/7.jpg',
+    'img/collares/8.jpg',
+    
   ],
   anillos: [
     'img/anillos/1.jpg',
     'img/anillos/2.jpg',
     'img/anillos/3.jpg',
     'img/anillos/4.jpg',
-    'img/anillos/5.jpg'
+    'img/anillos/5.jpg',
+    'img/anillos/6.jpg',
+    'img/anillos/7.jpg',
+    'img/anillos/8.jpg',
   ],
   accesorios: [
     'img/accesorios/1.jpg',
     'img/accesorios/2.jpg',
     'img/accesorios/3.jpg',
     'img/accesorios/4.jpg',
-    'img/accesorios/5.jpg'
+    'img/accesorios/5.jpg',
+    'img/accesorios/6.jpg',
+    'img/accesorios/7.jpg',
+    'img/accesorios/8.jpg',
   ]
 };
 
 areas.forEach((area) => {
   catalogData[area] = [];
-  for (let i = 1; i <= 20; i++) {
+
+  for (let i = 1; i <= 8; i++) {
     catalogData[area].push({
-      id: `${area}-${i}`,
-      name: `${area.charAt(0).toUpperCase() + area.slice(1)} ${i}`,
-      price: (20 + Math.floor(Math.random() * 100)).toString(),
+      id: `${area}-${i}`, // Identificador único para el producto
+      name: `${area.charAt(0).toUpperCase() + area.slice(1)} ${i}`, // Nombre del producto
+      price: (10 + Math.floor(Math.random() * 16)).toString(), // Precios entre 10 y 25
       image: sampleImages[area][(i - 1) % sampleImages[area].length]
     });
   }

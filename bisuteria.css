@@ -25,10 +25,12 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
   margin: 0;
+  overflow-x: hidden;
   font-family: 'Inter', sans-serif;
   color: var(--text);
   background: radial-gradient(circle at top left, rgba(186, 142, 221, 0.18), transparent 26%),
@@ -128,16 +130,11 @@ a {
   background: transparent;
   cursor: pointer;
   padding: 0.5rem;
-}
-
-.nav-toggle span {
-  display: block;
-  width: 26px;
-  height: 2px;
-  margin: 5px 0;
-  border-radius: 999px;
-  background: var(--purple-dark);
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  color: var(--purple-dark);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.95rem;
 }
 
 .cart-widget {
@@ -608,18 +605,31 @@ a {
 }
 
 .custom-card {
-  background: var(--surface);
-  padding: 3rem 2rem;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  border: 1px solid rgba(145, 96, 185, 0.1);
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.25rem;
-}
 
+
+  background: linear-gradient(135deg, #f8f4fb 0%, #e9def2 100%);
+    padding: 3rem 2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(145, 96, 185, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+}
+.custom-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 36px 90px rgba(121, 72, 157, 0.14);
+}
+.custom-card p {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    margin: 0;
+    color: rgba(22, 3, 19, 0.82);
+    line-height: 1.9;
+}
 .step-icon {
   width: 54px;
   height: 54px;
@@ -1053,9 +1063,9 @@ a {
 
 .care-slider-track {
   display: flex;
-  gap: 1rem;
-  width: calc(280px * 6);
-  animation: careScroll 28s linear infinite;
+  gap: 2rem;
+  width: max-content;
+  animation: careScroll 50s linear infinite;
 }
 
 .care-slider:hover .care-slider-track {
@@ -1063,16 +1073,24 @@ a {
 }
 
 .care-slide {
-  min-width: 280px;
+  width: 240px;
   flex-shrink: 0;
 }
 
 .care-slide img {
   width: 100%;
-  height: 100%;
+  aspect-ratio: 1 / 1;
   display: block;
-  border-radius: 28px;
+  border-radius: 24px;
   object-fit: cover;
+  border: 1.5px solid rgba(127, 90, 155, 0.15);
+  box-shadow: 0 10px 30px rgba(127, 90, 155, 0.1);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.care-slide img:hover {
+  transform: scale(1.05) rotate(1deg);
+  border-color: var(--purple);
 }
 
 @keyframes careScroll {
@@ -1294,6 +1312,14 @@ a {
   color: var(--purple-dark);
 }
 
+.about-card img {
+  width: 100%;
+  max-width: 250px; /* Evita que el logo sea demasiado grande en pantallas pequeñas */
+  height: auto;
+  margin: 1.5rem auto 0; /* Lo centra horizontalmente y le da espacio arriba */
+  filter: drop-shadow(0 10px 20px rgba(127, 90, 155, 0.12));
+}
+
 .site-footer {
   padding: 3rem 0 1.5rem;
   color: var(--text-muted);
@@ -1412,40 +1438,51 @@ a {
 
 @media (max-width: 720px) {
   .header-inner {
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: space-between;
-    gap: 1rem;
+    gap: 0.5rem;
+    padding: 0.6rem 0;
+  }
+
+  .brand {
+    font-size: 1.8rem;
+  }
+
+  .cart-widget {
+    order: 2;
+    margin-left: auto;
+  }
+
+  .nav-toggle {
+    order: 3;
+    display: flex;
+    z-index: 30;
   }
 
   .main-nav {
     position: fixed;
-    top: 76px;
-    left: 0;
-    right: 0;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 1.5rem 1.5rem 2rem;
-    background: rgba(255, 255, 255, 0.98);
-    border-top: 1px solid rgba(146, 113, 192, 0.16);
-    transform: translateY(-110%);
-    transition: transform 0.35s ease;
+    inset: 0;
+    height: 100vh;
     width: 100%;
-    box-shadow: 0 32px 64px rgba(89, 59, 132, 0.12);
-    z-index: 22;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    background: var(--surface-strong);
+    backdrop-filter: blur(20px);
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 25;
   }
 
   .main-nav.open {
-    transform: translateY(0);
+    transform: translateX(0);
   }
 
   .main-nav a {
-    width: 100%;
-    padding: 0.5rem 0;
-  }
-
-  .nav-toggle {
-    display: inline-flex;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--purple-dark);
   }
 
   .hero-content {
@@ -1469,6 +1506,14 @@ a {
 
   .promo-card {
     padding: 1.75rem;
+  }
+
+  .cart-button span:first-child {
+    display: none; /* Oculta el texto "Carrito" en móviles pequeños para ahorrar espacio */
+  }
+  
+  .cart-button {
+    padding: 0.6rem;
   }
 }
 
