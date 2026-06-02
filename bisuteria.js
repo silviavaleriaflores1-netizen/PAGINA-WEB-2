@@ -591,5 +591,81 @@ const initFooterStats = () => {
 
 initFooterStats();
 
+// Lógica para el slider de cuidados: Auto-scroll infinito con arrastre manual
+const setupCareSlider = () => {
+  const slider = document.querySelector('.care-slider');
+  const track = document.querySelector('.care-slider-track');
+  if (!slider || !track) return;
+
+  let isDragging = false;
+  let startX;
+  let scrollLeftX = 0; // Posición actual de desplazamiento
+  let scrollSpeed = 0.7; // Velocidad del auto-scroll automático
+
+  const animate = () => {
+    if (!isDragging) {
+      scrollLeftX -= scrollSpeed;
+      
+      // Como las imágenes están duplicadas, reiniciamos al llegar a la mitad del ancho total
+      const halfWidth = track.scrollWidth / 2;
+      if (Math.abs(scrollLeftX) >= halfWidth) {
+        scrollLeftX = 0;
+      }
+      track.style.transform = `translateX(${scrollLeftX}px)`;
+    }
+    requestAnimationFrame(animate);
+  };
+
+  const startDrag = (e) => {
+    isDragging = true;
+    slider.style.cursor = 'grabbing';
+    // Detectar posición inicial tanto para mouse como para touch
+    startX = (e.pageX || e.touches[0].pageX) - slider.offsetLeft;
+    
+    // Capturar la posición actual del transform para empezar desde ahí
+    const style = window.getComputedStyle(track);
+    const matrix = new DOMMatrixReadOnly(style.transform);
+    scrollLeftX = matrix.m41;
+  };
+
+  const stopDrag = () => {
+    if (!isDragging) return;
+    isDragging = false;
+    slider.style.cursor = 'grab';
+  };
+
+  const moveDrag = (e) => {
+    if (!isDragging) return;
+    if (e.cancelable) e.preventDefault();
+
+    const x = (e.pageX || e.touches[0].pageX) - slider.offsetLeft;
+    const walk = x - startX;
+    let newX = scrollLeftX + walk;
+
+    // Mantener el loop infinito durante el arrastre manual
+    const halfWidth = track.scrollWidth / 2;
+    if (newX > 0) newX = -halfWidth;
+    if (newX < -halfWidth) newX = 0;
+
+    scrollLeftX = newX; // Actualizamos la posición base
+    startX = x; // Actualizamos el inicio para que el movimiento sea relativo
+    track.style.transform = `translateX(${scrollLeftX}px)`;
+  };
+
+  // Eventos de Mouse
+  slider.addEventListener('mousedown', startDrag);
+  window.addEventListener('mouseup', stopDrag);
+  window.addEventListener('mousemove', moveDrag);
+
+  // Eventos de Touch (Móviles)
+  slider.addEventListener('touchstart', startDrag, { passive: true });
+  window.addEventListener('touchend', stopDrag);
+  window.addEventListener('touchmove', moveDrag, { passive: false });
+
+  requestAnimationFrame(animate);
+};
+
+setupCareSlider();
+
 // Inicial
 renderCatalog('all', '');

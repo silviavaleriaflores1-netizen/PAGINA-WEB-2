@@ -1059,17 +1059,14 @@ a {
   background: rgba(255, 255, 255, 0.92);
   border: 1px solid rgba(145, 96, 185, 0.14);
   padding: 1rem 0;
+  cursor: grab;
+  user-select: none;
 }
 
 .care-slider-track {
   display: flex;
   gap: 2rem;
   width: max-content;
-  animation: careScroll 50s linear infinite;
-}
-
-.care-slider:hover .care-slider-track {
-  animation-play-state: paused;
 }
 
 .care-slide {
