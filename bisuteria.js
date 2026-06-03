@@ -283,7 +283,7 @@ if (customDesignForm) {
 }
 
 heroShopButton.addEventListener('click', () => {
-  document.querySelector('#productos').scrollIntoView({ behavior: 'smooth' });
+  document.querySelector('#nosotros').scrollIntoView({ behavior: 'smooth' });
 });
 
 promoForm.addEventListener('submit', (event) => {
