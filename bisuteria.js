@@ -69,7 +69,7 @@ const canjearCodigoPromocional = (code, productName) => {
   }
 
   usedPromoCodes.add(normalizedCode);
-  addToCart(`${productName} (Promoción)`, '0');
+  addToCart(`${productName} (Promoción)`, '0', 'img/logo/LOGUIS.svg');
   setPromoFeedback(`Código canjeado. ${productName} se agregó gratis a tu carrito.`);
   promoCodeInput.value = '';
 };
@@ -99,14 +99,21 @@ const renderCart = () => {
 
   if (cartProducts.length === 0) {
     cartItemsList.innerHTML = '<p class="empty-cart">Tu carrito está vacío.</p>';
-    cartTotal.textContent = '$0';
+    cartTotal.textContent = 'Bs. 0';
     return;
   }
 
   const itemsHtml = cartProducts
     .map(
       (item, index) =>
-        `<div class="cart-item"><span>${item.name}</span><strong>Bs. ${item.price}</strong></div>`
+        `<div class="cart-item">
+          <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+          <div class="cart-item-info">
+            <span>${item.name}</span>
+            <strong>Bs. ${item.price}</strong>
+          </div>
+          <button class="remove-item" data-index="${index}" aria-label="Eliminar producto">&times;</button>
+        </div>`
     )
     .join('');
 
@@ -115,11 +122,19 @@ const renderCart = () => {
   cartTotal.textContent = `Bs. ${total}`;
 };
 
-const addToCart = (productName, price) => {
+const addToCart = (productName, price, image) => {
   cartItems += 1;
-  cartProducts.push({ name: productName, price });
+  cartProducts.push({ name: productName, price, image });
   renderCart();
   showToast(`${productName} agregado al carrito.`);
+};
+
+const removeFromCart = (index) => {
+  const removedProduct = cartProducts[index];
+  cartProducts.splice(index, 1);
+  cartItems -= 1;
+  renderCart();
+  showToast(`${removedProduct.name} eliminado del carrito.`);
 };
 
 const openProductModal = (card) => {
@@ -127,7 +142,7 @@ const openProductModal = (card) => {
   const price = card.dataset.price;
   const image = card.querySelector('img').src;
 
-  activeProduct = { name: productName, price };
+  activeProduct = { name: productName, price, image };
 
   modalTitle.textContent = productName;
   modalPrice.textContent = `Bs. ${price}`;
@@ -180,13 +195,21 @@ mainNav.querySelectorAll('a').forEach(link => {
 cartButton.addEventListener('click', toggleCartPanel);
 closeCartPanel.addEventListener('click', closeCart);
 
+cartItemsList.addEventListener('click', (e) => {
+  if (e.target.classList.contains('remove-item')) {
+    const index = parseInt(e.target.dataset.index);
+    removeFromCart(index);
+  }
+});
+
 addButtons.forEach((button) => {
   button.addEventListener('click', () => {
     const card = button.closest('.product-card');
     const productName = card.dataset.product;
     const price = card.dataset.price;
+    const image = card.querySelector('img').src;
 
-    addToCart(productName, price);
+    addToCart(productName, price, image);
 
     button.textContent = 'Agregado';
     button.disabled = true;
@@ -209,7 +232,7 @@ viewDetailsButtons.forEach((button) => {
 
 modalAddCartButton.addEventListener('click', () => {
   if (!activeProduct) return;
-  addToCart(activeProduct.name, activeProduct.price);
+  addToCart(activeProduct.name, activeProduct.price, activeProduct.image);
   closeProductModalFn();
 });
 
@@ -458,7 +481,8 @@ const renderCatalog = (filter = 'all', search = '') => {
       if (!card) return;
       const name = card.dataset.product;
       const price = card.dataset.price;
-      addToCart(name, price);
+      const image = card.querySelector('img').src;
+      addToCart(name, price, image);
       btn.textContent = 'Agregado';
       btn.disabled = true;
       btn.style.opacity = '0.8';
@@ -481,7 +505,7 @@ const renderCatalog = (filter = 'all', search = '') => {
       const productName = card.dataset.product;
       const productPrice = card.dataset.price;
       const productImage = card.querySelector('img').src;
-      activeProduct = { name: productName, price: productPrice };
+      activeProduct = { name: productName, price: productPrice, image: productImage };
       modalTitle.textContent = productName;
       modalPrice.textContent = `Bs. ${productPrice}`;
       modalImage.src = productImage;
