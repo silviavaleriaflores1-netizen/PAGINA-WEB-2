@@ -1,13 +1,13 @@
 import os
 import urllib.request
 
-# Mapa de nombres de archivos locales y sus URLs originales de Unsplash
+# Las claves son las rutas relativas donde se guardarán las imágenes.
 images = {
-    "manillas-1.jpg": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=800&q=80",
-    "manillas-2.jpg": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=800&q=80",
-    "manillas-3.jpg": "https://images.unsplash.com/photo-1611085797613-7ca384393247?auto=format&fit=crop&w=800&q=80",
-    "manillas-4.jpg": "https://images.unsplash.com/photo-1573408302185-06ff321cf6e6?auto=format&fit=crop&w=800&q=80",
-    "manillas-5.jpg": "https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=800&q=80",
+    "manillas/1.png": "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=1200&q=80&fm=png",
+    "manillas/2.png": "https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&w=1200&q=80&fm=png",
+    "manillas/3.png": "https://images.unsplash.com/photo-1611085797613-7ca384393247?auto=format&fit=crop&w=1200&q=80&fm=png",
+    "manillas/4.png": "https://images.unsplash.com/photo-1573408302185-06ff321cf6e6?auto=format&fit=crop&w=1200&q=80&fm=png",
+    "manillas/5.png": "https://images.unsplash.com/photo-1611652022419-a9419f74343d?auto=format&fit=crop&w=1200&q=80&fm=png",
     "aretes-1.jpg": "https://images.unsplash.com/photo-1630019051930-475820eb2e16?auto=format&fit=crop&w=800&q=80",
     "aretes-2.jpg": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&w=800&q=80",
     "aretes-3.jpg": "https://images.unsplash.com/photo-1617114919297-3c8ddb01f599?auto=format&fit=crop&w=800&q=80",
@@ -40,6 +40,11 @@ print("Iniciando descarga de imágenes predeterminadas...")
 for name, url in images.items():
     try:
         path = os.path.join('img', name)
+        # Asegura que la ruta de la imagen incluya el directorio 'img'
+        path = os.path.join('img', name.replace("/", os.sep))
+        # Crea el directorio si no existe (ej. 'img/manillas')
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+
         if not os.path.exists(path):
             urllib.request.urlretrieve(url, path)
             print(f"Descargado con éxito: {name}")

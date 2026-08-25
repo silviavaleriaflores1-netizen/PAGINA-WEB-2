@@ -362,33 +362,32 @@ const areas = ['manillas', 'aretes', 'collares', 'anillos', 'accesorios'];
 const catalogData = {};
 const sampleImages = {
   manillas: [
-    'img/manillas/1.jpg',
-    'img/manillas/2.jpg',
-    'img/manillas/3.jpg',
-    'img/manillas/4.jpg',
-    'img/manillas/5.jpg',
-    'img/manillas/6.jpg',
-    'img/manillas/7.jpg',
-    'img/manillas/8.jpg',
-  
+    'img/manillas/p3.png',
+    'img/manillas/p4.png',
+    'img/manillas/p5.png',
+    'img/manillas/p6.png',
+    'img/manillas/p7.png',
+    'img/manillas/p8.png',
+    'img/manillas/p9.png',
+    'img/manillas/p10.png',
   ],
   aretes: [
-    'img/aretes/estrella%20y%20concha.jpg',
-    'img/aretes/imagen%202.jpg',
-    'img/aretes/imagen%203.jpg',
-    'img/aretes/imagen%204.jpg',
-    'img/aretes/6.jpg',
-    'img/aretes/5.jpg',
-    'img/aretes/7.jpg',
-    'img/aretes/8.jpg'
+    'img/aretes/a1.png',
+    'img/aretes/a2.jpeg',
+    'img/aretes/a3.jpeg',
+    'img/aretes/a4.jpeg',
+    'img/aretes/a5.jpeg',
+    'img/aretes/a6.jpeg',
+    'img/aretes/a7.jpeg',
+    'img/aretes/a8.jpeg'
   ],
   collares: [
-    'img/collares/1.jpg',
-    'img/collares/2.jpg',
-    'img/collares/3.jpg',
+    'img/collares/c1.png',
+    'img/collares/c2.png',
+    'img/collares/c3.png',
+    'img/collares/c4.png',
+    'img/collares/c5.png',
     'img/collares/4.jpg',
-    'img/collares/5.jpg',
-    'img/collares/6.jpg',
     'img/collares/7.jpg',
     'img/collares/8.jpg',
     
@@ -620,6 +619,12 @@ const setupCareSlider = () => {
   const slider = document.querySelector('.care-slider');
   const track = document.querySelector('.care-slider-track');
   if (!slider || !track) return;
+
+  // Clonar los slides para el bucle infinito
+  const slides = Array.from(track.children);
+  slides.forEach(slide => {
+    track.appendChild(slide.cloneNode(true));
+  });
 
   let isDragging = false;
   let startX;
